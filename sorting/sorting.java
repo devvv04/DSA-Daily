@@ -1,3 +1,4 @@
+package sorting;
 public class sorting {
      public int[] SelectionSort(int[] nums){
         int n = nums.length;

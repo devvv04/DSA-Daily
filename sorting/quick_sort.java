@@ -1,3 +1,4 @@
+package sorting;
 public class quick_sort {
     public int[] quicksort(int[] arr){
         qs(arr,0,arr.length-1);

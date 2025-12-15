@@ -1,3 +1,4 @@
+package patterns;
 
 import java.util.Scanner;
 class star_patterns {

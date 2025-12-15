@@ -1,3 +1,4 @@
+package sorting;
 class Solution {
     private void recursivebs(int[] nums , int i){
         if(i==1) return;
