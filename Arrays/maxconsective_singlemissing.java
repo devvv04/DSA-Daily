@@ -129,11 +129,14 @@ class Main {
     
     
     public static void main(String[] args) {
-        int[] arr1 = {10, 5, 2, 7, 1, 9};
+        // int[] arr1 = {10, 5, 2, 7, 1, 9};
         // int[] arr2 = {2,3,4,5};
        Main m = new Main();
-       int ans = m.singleNumberusingxor(arr1,17);
-       System.out.println(ans);
+    //    int ans = m.singleNumberusingxor(arr1,17);
+    //    System.out.println(ans);
+         int[] qst = {1,1,0,1,1,1};
+         int sol = m.findMaxConsecutiveOnes(qst);
+         System.out.println(sol);
     //   int[] ans = m.union(arr1,arr2);
     //   for(int i=0;i<ans.length;i++){
     //       System.out.println(ans[i]);
