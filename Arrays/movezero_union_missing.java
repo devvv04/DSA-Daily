@@ -1,6 +1,6 @@
 package Arrays;
 import java.util.*;
-class Main {
+class movezero_union_missing {
      public int[] moveZeroes(int[] nums) {
         int l = 0;
         int r = 1;
@@ -118,7 +118,7 @@ class Main {
     }
         
     public static void main(String[] args) {
-        Main m = new Main();
+        movezero_union_missing m = new movezero_union_missing();
         int[] arr = {0, 2, 3, 1, 4};
     //   int[] nums1 = {3, 4, 6, 7, 9, 9}; 
     //   int[] nums2 = {1, 5, 7, 8, 8};
