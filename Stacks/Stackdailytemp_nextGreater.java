@@ -1,4 +1,4 @@
-package Arrays;
+package Stacks;
 import java.util.Stack;
 class Stackdailytemp_nextGreater  {
     
