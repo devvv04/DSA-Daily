@@ -140,24 +140,178 @@ public class HardArray {
          if(cnt2>nums.length/3) ls.add(c2);
          return ls;
      }
+
+      public void merge2sorted(int[] nums1, int m, int[] nums2, int n){
+         //m = no. of real elem in nums1 , bcz nums1 = m+n
+         int i = m-1;
+         int j = n-1;
+         int k = nums1.length-1;
+         while(i>=0 && j>=0){
+             if(nums1[i]<=nums2[j]){
+                 nums1[k] = nums2[j];
+                 k--;
+                 j--;
+             }
+             else{
+                 nums1[k] = nums1[i];
+                 k--;
+                 i--;
+             }
+         }
+         while(j>=0){
+             nums1[k] = nums2[j];
+             k--;
+             j--;
+         }
+     }
+     
+    public int[] findMissingRepeatingNumbers(int[] nums) {
+          int n = nums.length;
+            int realsum = (n * (n+1))/2;
+            int currsum = 0;
+            int realss = (n*(n+1)*(2*n+1))/6;
+            int currss = 0;
+            for(int num : nums){
+                currsum = currsum + num;
+                currss = currss + num*num;
+            }
+            int diff1 = realsum - currsum; //A-B
+            int diff2 = realss - currss; //A2-B2
+            int sum = diff2 / diff1; //A+B
+            int b = (sum - diff1) / 2;
+            int a = sum -b;
+            int[] ans = new int[2];
+            ans[0]= b;
+            ans[1] = a;
+            return ans;
+    }
+    
+    public int coutnInversion(int[] nums){
+        return mergedivide(nums,0,nums.length-1);
+    }
+    private int mergedivide(int[]nums,int low, int high){
+        int count = 0;
+        if(low>=high) return count;
+        int mid = low + (high-low)/2;
+        count = count + mergedivide(nums,low,mid);   
+        count = count + mergedivide(nums,mid+1,high);
+        count = count + countfn(nums,low,mid,high);
+        return count;
+    }
+    private int countfn(int[]nums,int low,int mid,int high){
+        //sort + count part
+        int count = 0;
+        int l = low;
+        int r = mid+1;
+        int[] temp = new int[high-low+1];
+        int k = 0;
+        while(l<=mid && r<=high){
+            if(nums[l]<=nums[r]){
+                temp[k] = nums[l];
+                k++;
+                l++;
+            }
+            else{
+                temp[k] = nums[r];
+                count = count + (mid-l+1);
+                k++;
+                r++;
+            }
+        }
+        while(l<=mid){
+            temp[k] = nums[l];
+            k++;
+            l++;
+        }
+        while(r<=high){
+            temp[k] = nums[r];
+            k++;
+            r++;
+        }
+        //merge 
+        for(int i=0;i<temp.length;i++){
+            nums[low+i] = temp[i];
+        }
+        return count;
+    }
+    
+    public int reversepair(int[] nums){
+        return dividerev(nums,0,nums.length-1);
+    }
+    private int dividerev(int[]nums, int low , int high){
+        int count = 0;
+        if(low>=high) return count;
+        int mid = low + (high-low)/2;
+        count = count + dividerev(nums,low,mid);
+        count = count + dividerev(nums,mid+1,high);
+        count = count + countfnrev(nums,low,mid,high);
+        mergerev(nums,low,mid,high);
+        return count;
+    }
+    private int countfnrev(int[]nums , int low , int mid , int high){
+        int count = 0;
+        int r = mid+1;
+        for(int l = low;l<=mid;l++){
+            while(r<=high && (long)nums[l]>2L * nums[r]){
+                r++;
+            }
+            count = count + (r-(mid+1));
+        }
+        return count;
+    }
+    private void mergerev(int[] nums , int low, int mid , int high){
+        int l = low;
+        int r = mid+1;
+        int[] temp = new int[high-low+1];
+        int k = 0;
+        while(l<=mid && r<=high){
+            if(nums[l]<=nums[r]){
+                temp[k] = nums[l];
+                k++;
+                l++;
+            }
+            else{
+                temp[k] = nums[r];
+                k++;
+                r++;
+            }
+        }
+        while(l<=mid){
+            temp[k] = nums[l];
+            k++;
+            l++;
+        }
+        while(r<=high){
+            temp[k] = nums[r];
+            k++;
+            r++;
+        }
+        //merge 
+        for(int i=0;i<temp.length;i++){
+            nums[low+i] = temp[i];
+        }
+    }
     
     public static void main(String[] args) {
-       HardArray m = new HardArray();
+        HardArray m = new HardArray();
         // List<int[]> ls = new ArrayList<>();
         // List<Integer> ls = new ArrayList<>();
-        // int[] qst = {15, -2, 2, -8, 1, 7, 10, 23};
-        int[][] qst = {{1,4},{4,5}};
+        int[] qst1 = {1,3,2,3,1};
+        // int[] qst2 = {2,5,6};
+        // m.merge2sorted(qst1,3,qst2,3);
+        int ans = m.reversepair(qst1);
+        System.out.println(ans);
+        // int[][] qst = {{1,4},{4,5}};
         // ls = m.fourSum(qst);
-        int[][] ans = m.mergeInt(qst);
+        // int[][] ans = m.mergeInt(qst);
         // ls = m.mergeInt(qst);
-        
         // System.out.println(ls);
-        for(int i=0;i<ans.length;i++){
-            for(int j=0;j<ans[0].length;j++){
-                System.out.print(ans[i][j]+" ");
-            }
-            System.out.println();
-        }
+        // for(int i=0;i<ans.length;i++){
+        //     for(int j=0;j<ans[0].length;j++){
+        //         System.out.print(ans[i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
         
     }
 }
