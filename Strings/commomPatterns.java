@@ -58,12 +58,22 @@ public class commomPatterns {
         return count;
     }
     
+    public char maxfreq(String s){
+        int[] freq = new int[26];
+        for(char c : s.toCharArray()){
+            freq[c-'a']++;
+        }
+        int highfreq = 0;
+        int highind = 0;
+        for(int i=0;i<26;i++){
+            if(freq[i]>highfreq){
+                highfreq = freq[i];
+                highind = i;
+            } 
+        }
+        return (char)('a'+highind);
+    }
     
-    
-//     1 Reverse String
-// 2 Palindrome
-// 3 Count Vowels
-// 4 Count Digits
 // 5 Remove Spaces
 // 6 Character Frequency
 // 7 Remove Duplicates
@@ -73,10 +83,10 @@ public class commomPatterns {
     
     public static void main(String[] args) {
         commomPatterns m = new commomPatterns();
-        String s = "hel1dev465in";
+        String s = "devvvvveeeeeeeeeerma";
         // boolean ans = m.palindrome(s);
         // String ans = m.reversesent(s);
-        int ans = m.countDigits(s);
+        char ans = m.maxfreq(s);
         System.out.println(ans);
         // Stack<Character> st = new Stack<>();
         // st.push('a');
